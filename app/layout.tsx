@@ -14,9 +14,11 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Create Next App",
-  description: "Manage your events, schedules and meetings at your ease.",
+  title: "Calendr – Effortless Scheduling & Event Management",
+  description:
+    "Calendr is your smart, minimalist calendar app for organizing events, meetings, and schedules. Stay on top of your day, boost productivity, and never miss a moment.",
 };
+
 
 export default function RootLayout({
   children,
