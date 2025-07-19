@@ -12,6 +12,23 @@ const updatedAt = timestamp("updatedAt")
   .defaultNow()
   .$onUpdate(() => new Date()) // automatically updates to current time on update
 
+// Users table to sync with Clerk
+export const UserTable = pgTable("users", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  clerkUserId: text("clerkUserId").notNull().unique(),
+  email: text("email").notNull(),
+  firstName: text("firstName"),
+  lastName: text("lastName"),
+  imageUrl: text("imageUrl"),
+  createdAt,
+  updatedAt,
+})
+
+// User relations
+export const userRelations = relations(UserTable, ({ many }) => ({
+  events: many(EventTable),
+  schedule: many(ScheduleTable),
+}))
 // Define the "events" table with fields like name, description, and duration
 export const EventTable = pgTable(
     "events", // table name in the database
@@ -37,6 +54,13 @@ export const EventTable = pgTable(
       ])
 )
 
+// Event relations
+export const eventRelations = relations(EventTable, ({ one }) => ({
+  user: one(UserTable, {
+    fields: [EventTable.clerkUserId],
+    references: [UserTable.clerkUserId],
+  }),
+}))
 export const ScheduleTable = pgTable("schedules", {
     id: uuid("id").primaryKey().defaultRandom(),
     timezone: text("timezone").notNull(),
