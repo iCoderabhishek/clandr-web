@@ -1,13 +1,9 @@
-import LandingPage from "@/components/LandingPage";
-import { currentUser } from "@clerk/nextjs/server";
-import { redirect } from "next/navigation";
-
-export default async function HomePage() {
-  const user = await currentUser();
-
-  // If no user is logged in, render the public landing page
-  if (!user) return <LandingPage />;
-
-  // If user is logged in, redirect them to the events page
-  return redirect("/events");
+export default function HomePage() {
+  return (
+    <div style={{ padding: '20px', textAlign: 'center' }}>
+      <h1>Calendr API</h1>
+      <p>Backend API for Calendr mobile and web applications</p>
+      <p>API endpoints available at /api/*</p>
+    </div>
+  )
 }
