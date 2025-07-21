@@ -3,9 +3,8 @@ import { ClerkProvider } from "@clerk/nextjs";
 
 export const metadata: Metadata = {
   title: "Calendr API",
-  description: "Calendar scheduling API backend",
+  description: "Calendar scheduling API backend for React Native app",
 };
-
 
 export default function RootLayout({
   children,
@@ -15,7 +14,7 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body>
+        <body style={{ fontFamily: 'system-ui, sans-serif', margin: 0, padding: '2rem', backgroundColor: '#f5f5f5' }}>
           {children}
         </body>
       </html>
